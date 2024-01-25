@@ -1,0 +1,62 @@
+esphome:
+  name: eldersign
+
+esp8266:
+  board: nodemcuv2
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  password: ""
+
+wifi:
+  ssid: "<SSID>"
+  password: "<PASSWORD>"
+  fast_connect: on
+
+sensor:
+  - platform: uptime
+    name: Uptime Sensor
+
+web_server:
+  port: 80
+
+light:
+  - platform: neopixelbus
+    type: GRB
+    variant: WS2812
+    pin: GPIO4
+    num_leds: 12
+    name: "Light Ring"
+    restore_mode: ALWAYS_OFF
+    effects:
+      - random:
+          name: "Random"
+      - pulse:
+          name: "Pulse"
+      - pulse:
+          name: "Pulse Fast"
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0%
+          max_brightness: 100%
+      - addressable_rainbow:
+          name: "Rainbow"
+      - addressable_twinkle:
+      - addressable_twinkle:
+          name: "Twinkle Fast"
+          twinkle_probability: 50%
+          progress_interval: 4ms
+      - addressable_fireworks:
+          name: "Fireworks"
+      - addressable_fireworks:
+          name: "Fire"
+          update_interval: 32ms
+          spark_probability: 75%
+          use_random_color: false
+          fade_out_rate: 50
